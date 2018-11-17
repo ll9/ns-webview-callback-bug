@@ -1,5 +1,4 @@
 import Vue from 'nativescript-vue'
-import App from './components/App'
 import FirstPage from './components/FirstPage';
 import VueDevtools from 'nativescript-vue-devtools'
 

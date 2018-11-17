@@ -1,22 +1,23 @@
 <template>
     <Page @loaded="pageLoaded">
         <ActionBar title="Welcome to NativeScript-Vue!"/>
-        <GridLayout columns="*" rows="*, *, *">
-            <Label class="message" :text="msg" col="0" row="0"/>
-            <WebView id="webView" col="0" row="1"/>
+        <StackLayout >
+            <Label class="message" :text="msg" />
+            <WebView id="webView" />
             <Button text="callJS" @tap="callJs"></Button>
-        </GridLayout>
+            <Button text="nav" @tap="nav"></Button>
+        </StackLayout>
     </Page>
 </template>
 
 <script>
-import Vue from 'vue';
+import Vue from "vue";
 
 var webViewInterfaceModule = require("nativescript-webview-interface");
 var oWebViewInterface;
-import SecondPage from '../components/SecondPage';
+import SecondPage from "../components/SecondPage";
 
-const WWW_ROOT = '~/wwwroot/index.html';
+const WWW_ROOT = "~/wwwroot/index.html";
 
 export default Vue.extend({
   data() {
@@ -27,7 +28,7 @@ export default Vue.extend({
     };
   },
   computed: {
-      any: () => {}
+    any: () => {}
   },
   methods: {
     pageLoaded(args) {
@@ -39,13 +40,19 @@ export default Vue.extend({
       );
     },
     callJs() {
-        this.oWebViewInterface.callJSFunction('jsFun', null, (resp) => {
-          console.log(resp)
-          this.$navigateTo(SecondPage);
-          });
-        
+      this.oWebViewInterface.callJSFunction(
+        "jsFun",
+        null,
+        resp => {
+          console.log(resp);
+        },
+        err => console.log(err)
+      );
+    },
+    nav() {
+      this.$navigateTo(SecondPage);
     }
-  },
+  }
 });
 </script>
 
